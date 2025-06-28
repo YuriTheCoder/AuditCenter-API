@@ -6,76 +6,76 @@
 ![Swagger](https://img.shields.io/badge/Swagger-OpenAPI%203-blueviolet)
 ![Maven](https://img.shields.io/badge/Build-Maven-orange)
 
-**AuditCenter** é uma API RESTful robusta e segura, construída com Java e Spring Boot, projetada para centralizar e gerenciar eventos de auditoria de múltiplos sistemas. A aplicação conta com autenticação baseada em JWT, controle de acesso por papéis (Roles), e uma funcionalidade inovadora de streaming de eventos em tempo real com Server-Sent Events (SSE).
+**AuditCenter** is a robust and secure RESTful API built with Java and Spring Boot, designed to centralize and manage audit events from multiple systems. The application features JWT-based authentication, role-based access control, and an innovative real-time event streaming capability using Server-Sent Events (SSE).
 
 ---
 
-## Funcionalidades Principais
+## Key Features
 
-- **Segurança de Ponta**: Autenticação via JWT e senhas criptografadas com BCrypt. Endpoints são protegidos com base em papéis (`ADMIN`, `ANALYST`).
-- **API de Auditoria**:
-  - `POST /events/webhook`: Endpoint para receber eventos de auditoria de outros sistemas.
-  - `GET /events`: Lista os eventos de auditoria. Um `ADMIN` vê todos os eventos, enquanto um `ANALYST` vê apenas os eventos associados ao seu e-mail.
-- **Streaming em Tempo Real**:
-  - `GET /events/stream`: Estabelece uma conexão Server-Sent Events (SSE) para que clientes possam receber eventos de auditoria assim que eles acontecem.
-- **API de Autenticação**:
-  - `POST /auth/register`: Registra novos usuários (`ADMIN` ou `ANALYST`).
-  - `POST /auth/login`: Autentica usuários e retorna um token JWT.
-- **Documentação Interativa**: API totalmente documentada com Swagger (OpenAPI 3), permitindo fácil exploração e teste dos endpoints.
-- **Tratamento de Erros**: Respostas de erro padronizadas e claras para uma melhor experiência do desenvolvedor.
+- **State-of-the-Art Security**: JWT authentication and BCrypt-encrypted passwords. Endpoints are protected based on user roles (`ADMIN`, `ANALYST`).
+- **Audit API**:
+  - `POST /events/webhook`: An endpoint to receive audit events from external systems.
+  - `GET /events`: Lists audit events. An `ADMIN` can see all events, while an `ANALYST` can only see events associated with their email.
+- **Real-Time Streaming**:
+  - `GET /events/stream`: Establishes a Server-Sent Events (SSE) connection, allowing clients to receive audit events as they happen.
+- **Authentication API**:
+  - `POST /auth/register`: Registers new users (`ADMIN` or `ANALYST`).
+  - `POST /auth/login`: Authenticates users and returns a JWT.
+- **Interactive Documentation**: Fully documented API with Swagger (OpenAPI 3), enabling easy exploration and testing of all endpoints.
+- **Error Handling**: Standardized and clear error responses for a better developer experience.
 
 ---
 
-## Estrutura do Projeto
+## Project Structure
 
-O projeto segue uma arquitetura em camadas para garantir a separação de responsabilidades e a manutenibilidade:
+The project follows a layered architecture to ensure separation of concerns and maintainability:
 
 ```
 com.auditcenter
-├── config         // Configurações do Spring Security e Beans
-├── controller     // Controladores REST (porta de entrada da API)
-├── dto            // Data Transfer Objects (para requisições e respostas)
-├── entity         // Entidades JPA (modelo de dados)
-├── exception      // Handler de exceções global
-├── mapper         // Mapeadores (MapStruct) para conversão DTO-Entidade
-├── repository     // Repositórios Spring Data JPA (acesso ao banco)
-├── security       // Lógica de JWT, filtros e UserDetailsService
-└── service        // Lógica de negócio da aplicação
+├── config         // Spring Security and Bean configurations
+├── controller     // REST Controllers (API entry points)
+├── dto            // Data Transfer Objects (for requests and responses)
+├── entity         // JPA Entities (data model)
+├── exception      // Global exception handler
+├── mapper         // MapStruct mappers for DTO-Entity conversion
+├── repository     // Spring Data JPA repositories (database access)
+├── security       // JWT logic, filters, and UserDetailsService
+└── service        // Business logic of the application
 ```
 
 ---
 
-## Como Configurar e Rodar o Projeto
+## How to Set Up and Run the Project
 
-### Pré-requisitos
-- **Java 17** ou superior
-- **Apache Maven** 3.6 ou superior
-- Um terminal (como `cmd`, `PowerShell` ou `Git Bash`)
+### Prerequisites
+- **Java 17** or higher
+- **Apache Maven** 3.6 or higher
+- A terminal (`cmd`, `PowerShell`, or `Git Bash`)
 
-### Passos para Execução
+### Execution Steps
 
-1.  **Clone o Repositório** (quando estiver no GitHub):
+1.  **Clone the Repository**:
     ```bash
-    git clone <URL_DO_SEU_REPOSITORIO>
-    cd AuditCenter
+    git clone https://github.com/YuriTheCoder/AuditCenter-API.git
+    cd AuditCenter-API
     ```
 
-2.  **Inicie a Aplicação via Maven**:
-    O comando abaixo irá compilar o projeto e iniciar o servidor web embutido na porta `8080`.
+2.  **Run the Application via Maven**:
+    This command will compile the project and start the embedded web server on port `8080`.
     ```bash
     mvn spring-boot:run
     ```
-    O servidor estará pronto quando você vir a mensagem `Tomcat started on port(s): 8080 (http)`. Deixe este terminal aberto.
+    The server is ready when you see the message `Tomcat started on port(s): 8080 (http)`. Keep this terminal running.
 
-3.  **Acesse a Documentação da API (Swagger)**:
-    Com o servidor rodando, abra seu navegador e acesse:
+3.  **Access the API Documentation (Swagger)**:
+    With the server running, open your browser and navigate to:
     [**http://localhost:8080/swagger-ui.html**](http://localhost:8080/swagger-ui.html)
 
 ---
 
-## Como Usar a API (via Swagger)
+## How to Use the API (via Swagger)
 
-1.  **Crie Usuários**: Use o endpoint `POST /auth/register` para criar um usuário `ADMIN` e um `ANALYST`.
-2.  **Faça Login**: Use `POST /auth/login` com as credenciais de um dos usuários para obter um token JWT.
-3.  **Autorize-se**: Clique no botão "Authorize" no topo da página do Swagger, cole o token no formato `Bearer <seu-token>` e autorize.
-4.  **Teste os Endpoints**: Agora você pode usar os endpoints protegidos na seção "Eventos de Auditoria" para criar e listar eventos. 
+1.  **Create Users**: Use the `POST /auth/register` endpoint to create an `ADMIN` and an `ANALYST` user.
+2.  **Log In**: Use `POST /auth/login` with one of the user's credentials to obtain a JWT.
+3.  **Authorize Yourself**: Click the "Authorize" button at the top of the Swagger page, paste the token in the format `Bearer <your-token>`, and authorize.
+4.  **Test the Endpoints**: You can now use the protected endpoints under the "Eventos de Auditoria" section to create and list events. 
