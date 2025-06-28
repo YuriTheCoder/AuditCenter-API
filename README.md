@@ -10,7 +10,15 @@
 
 ---
 
-## Key Features
+## 🏛️ API Architecture
+
+This diagram illustrates the flow of requests, security layers, and component interactions within the API.
+
+[**View a diagram of the architecture here.**](https://ibb.co/BVYrXk4D)
+
+---
+
+## ✨ Key Features
 
 - **State-of-the-Art Security**: JWT authentication and BCrypt-encrypted passwords. Endpoints are protected based on user roles (`ADMIN`, `ANALYST`).
 - **Audit API**:
@@ -26,7 +34,7 @@
 
 ---
 
-## Project Structure
+## 🛠️ Project Structure
 
 The project follows a layered architecture to ensure separation of concerns and maintainability:
 
@@ -45,7 +53,7 @@ com.auditcenter
 
 ---
 
-## How to Set Up and Run the Project
+## 🚀 How to Set Up and Run the Project
 
 ### Prerequisites
 - **Java 17** or higher
@@ -73,9 +81,36 @@ com.auditcenter
 
 ---
 
-## How to Use the API (via Swagger)
+## ✅ Automated Tests
 
-1.  **Create Users**: Use the `POST /auth/register` endpoint to create an `ADMIN` and an `ANALYST` user.
-2.  **Log In**: Use `POST /auth/login` with one of the user's credentials to obtain a JWT.
-3.  **Authorize Yourself**: Click the "Authorize" button at the top of the Swagger page, paste the token in the format `Bearer <your-token>`, and authorize.
-4.  **Test the Endpoints**: You can now use the protected endpoints under the "Eventos de Auditoria" section to create and list events. 
+The project includes unit tests for the service layer using JUnit and Mockito to ensure the business logic is working correctly.
+
+To run the tests, execute the following command in your terminal:
+```bash
+mvn test
+```
+Test classes are located in `src/test/java/com/auditcenter/service/`.
+
+---
+
+## 🔐 Using the API with JWT
+
+All protected endpoints require a JWT Bearer Token for authorization.
+
+1.  **Get the Token**: Use the `POST /auth/login` endpoint with a registered user's credentials to get an `accessToken`.
+2.  **Authorize in Swagger**: Click the **Authorize** button at the top of the Swagger UI. In the dialog, paste your token in the following format:
+    ```
+    Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9...
+    ```
+3.  **Execute**: You can now successfully call any protected endpoint!
+
+---
+
+## ☁️ Deploy (Optional)
+
+You can deploy this API for free on a cloud platform like Render or Railway.
+
+1.  Push your final code to your GitHub repository.
+2.  Create a new "Web Service" in [Render](https://render.com) and connect it to your GitHub repository.
+3.  Render will automatically detect it's a Java application and use a command like `mvn spring-boot:run` to start it.
+4.  Your API will be deployed with a public URL, and Swagger will be available at `your-url.onrender.com/swagger-ui.html`. 
