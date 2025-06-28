@@ -14,7 +14,9 @@
 
 This diagram illustrates the flow of requests, security layers, and component interactions within the API.
 
-![API Architecture Diagram](https://i.ibb.co/4g1g0gtS/Editor-Mermaid-Chart-2025-06-28-151636.png)
+<p align="center">
+  <img src="https://i.ibb.co/4g1g0gtS/Editor-Mermaid-Chart-2025-06-28-151636.png" alt="API Architecture Diagram" />
+</p>
 
 ---
 
